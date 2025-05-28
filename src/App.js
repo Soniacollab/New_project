@@ -1,4 +1,3 @@
-import React from 'react';
 import { useMembers } from './useMembers';
 import './App.css';
 
