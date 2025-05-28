@@ -1,25 +1,11 @@
 import React from 'react';
-import { gql, useQuery } from '@apollo/client';
+import { useMembers } from './useMembers';
 import './App.css';
 
-// Définir la requête GraphQL
-const GET_MEMBERS = gql`
-  query {
-    triples(
-      where: {
-        predicate: { label: { _eq: "is member of" } }
-        object: { label: { _eq: "The Hacking Project" } }
-      }
-    ) {
-      subject {
-        label
-      }
-    }
-  }
-`;
+
 
 function App() {
-  const { loading, error, data } = useQuery(GET_MEMBERS);
+  const { loading, error, data } = useMembers();
 
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur : {error.message}</p>;
