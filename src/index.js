@@ -3,21 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// 1. Création du client Apollo
-const client = new ApolloClient({
-  uri: 'https://prod.base.intuition-api.com/v1/graphql',
-  cache: new InMemoryCache()
-});
+const queryClient = new QueryClient();
 
 // 2. Création du root et rendu avec ApolloProvider
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <QueryClientProvider client={queryClient}>
       <App />
-    </ApolloProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
