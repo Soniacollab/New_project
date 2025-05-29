@@ -1,13 +1,20 @@
-import { useMembers } from './useMembers';
+import React from 'react';
+import { useGetTriplesQuery } from '@0xintuition/graphql';
 import './App.css';
 
 
 
 function App() {
-  const { loading, error, data } = useMembers();
+  const { error, data } = useGetTriplesQuery({
+  where: {
+    predicate: { label: { _eq: "is member of" } },
+    object: { label: { _eq: "The Hacking Project" } },
+  }
+});
 
-  if (loading) return <p>Chargement...</p>;
-  if (error) return <p>Erreur : {error.message}</p>;
+  
+   if (error) return <p>Erreur : {error.message}</p>;
+   if (!data || !data.triples) return <p>Chargement...</p>;
 
   return (
     <div className="App">
